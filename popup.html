@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tidy Trail</title>
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    body { width: 348px; padding: 16px 16px 14px; }
+    .bar { display: flex; align-items: center; gap: 10px; }
+    .bar img { width: 30px; height: 30px; border-radius: 8px; }
+    .bar .brand { flex: 1; font-weight: 600; font-size: 13.5px; letter-spacing: -.005em; }
+    .hello { margin: 20px 2px 16px; }
+    .hello h1 { margin-bottom: 6px; }
+    .hello p { font-size: 13px; }
+    .hello .tally { margin-top: 2px; }
+    .hello .tally strong { font-size: 15px; font-variant-numeric: tabular-nums; }
+    .hello.paused h1 { color: var(--muted); }
+    .site { margin-bottom: 12px; }
+    .site .row { padding: 11px 12px 11px 14px; gap: 12px; }
+    .tile { width: 34px; height: 34px; border-radius: 10px; flex: none; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: 15px; text-transform: uppercase; }
+    .site .who { flex: 1; min-width: 0; }
+    .site .host { font-weight: 500; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .site .state { font-size: 12px; color: var(--muted); line-height: 1.35; }
+    .site .state.on { color: var(--ok); }
+    .actions { display: grid; gap: 8px; }
+    .actions .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    #feedback { min-height: 20px; margin: 10px 2px 0; font-size: 12.5px; color: var(--muted); }
+    #feedback .confirm { display: flex; gap: 8px; margin-top: 8px; }
+    #feedback .confirm .btn { flex: 1; }
+    footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 10px 2px 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+    kbd { font: 500 11.5px var(--font); padding: 1px 7px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <img src="icons/icon48.png" alt="">
+    <span class="brand">Tidy Trail</span>
+    <label class="switch" title="Turn protection on or off">
+      <input type="checkbox" id="enabled" aria-label="Protection on"><span class="track"></span>
+    </label>
+  </div>
+
+  <section class="hello" id="hello">
+    <h1 id="greet">Hello</h1>
+    <p id="state"></p>
+    <p class="tally"><strong id="count">0</strong> <span id="countLabel">entries removed so far.</span></p>
+    <p class="muted small" id="lastline"></p>
+  </section>
+
+  <section class="group site" id="siteBox">
+    <div class="row">
+      <div class="tile" id="tile">?</div>
+      <div class="who">
+        <div class="host" id="host">Open a website</div>
+        <div class="state" id="siteState">Visit a site to hide it from history.</div>
+      </div>
+      <button class="btn small primary" id="siteBtn" disabled>Hide</button>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="btn primary block" id="clean">Clean now</button>
+    <button class="btn block" id="pause">Pause for 30 minutes</button>
+    <div class="two">
+      <button class="btn" id="preview">Preview</button>
+      <button class="btn" id="options">Settings</button>
+    </div>
+  </div>
+  <div id="feedback" role="status" aria-live="polite"></div>
+
+  <footer>
+    <span>Shortcut <kbd id="shortcut">Not set</kbd></span>
+    <button class="link" id="activity">View activity</button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
